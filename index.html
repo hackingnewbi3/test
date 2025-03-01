@@ -18,30 +18,33 @@
             animation: flicker 1.5s infinite alternate;
         }
         .console {
-            font-size: 1.5em;
+            font-size: 1.2em;
             border: 2px solid #0fff95;
             padding: 20px;
             display: inline-block;
             margin-top: 20px;
-            min-height: 50px;
+            min-height: 300px;
+            width: 80%;
             background: rgba(15, 15, 15, 0.8);
             box-shadow: 0 0 20px #0fff95;
+            text-align: left;
+            overflow-y: auto;
+            white-space: pre-wrap;
         }
-        .btn {
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 1.5em;
-            color: #0d0d0d;
-            background: linear-gradient(90deg, #0fff95, #00cc66);
+        .input-line {
+            display: flex;
+        }
+        .input-line span {
+            color: #0fff95;
+        }
+        .input-line input {
+            background: none;
             border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #0fff95;
-            transition: all 0.3s;
-        }
-        .btn:hover {
-            background: linear-gradient(90deg, #00cc66, #0fff95);
-            transform: scale(1.1);
+            color: #0fff95;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            outline: none;
+            width: 100%;
         }
         @keyframes flicker {
             0% { opacity: 1; }
@@ -51,7 +54,56 @@
 </head>
 <body>
     <h1>Welcome to zZz</h1>
-    <div class="console" id="console">[ Terminal Ready ]</div>
-    <br>
+    <div class="console" id="console">
+        <div>Welcome to zZz Terminal. Type 'help' to see available commands.</div>
+    </div>
+    <div class="input-line">
+        <span>root@zZz:~#</span>
+        <input type="text" id="commandInput" autofocus>
+    </div>
+    <script>
+        const consoleDiv = document.getElementById("console");
+        const inputField = document.getElementById("commandInput");
+        let currentDirectory = "/home/user";
+
+        const commands = {
+            "help": "Available commands: ls, cd, pwd, clear",
+            "ls": "Documents  Downloads  Pictures  Music  Desktop",
+            "pwd": () => currentDirectory,
+            "cd": (args) => {
+                if (!args || args === "~") {
+                    currentDirectory = "/home/user";
+                } else {
+                    currentDirectory += "/" + args;
+                }
+                return "Changed directory to " + currentDirectory;
+            },
+            "clear": () => {
+                consoleDiv.innerHTML = "";
+                return "";
+            }
+        };
+
+        inputField.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                let input = inputField.value.trim();
+                let parts = input.split(" ");
+                let command = parts[0];
+                let args = parts.slice(1).join(" ");
+
+                consoleDiv.innerHTML += `\n${currentDirectory}$ ${input}`;
+
+                if (commands[command]) {
+                    let output = typeof commands[command] === "function" ? commands[command](args) : commands[command];
+                    consoleDiv.innerHTML += `\n${output}`;
+                } else {
+                    consoleDiv.innerHTML += "\nCommand not found";
+                }
+
+                inputField.value = "";
+                consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            }
+        });
+    </script>
 </body>
 </html>
