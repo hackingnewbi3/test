@@ -14,6 +14,8 @@
         }
         h1 {
             font-size: 3em;
+            text-shadow: 0 0 10px #0fff95;
+            animation: flicker 1.5s infinite alternate;
         }
         .console {
             font-size: 1.5em;
@@ -22,21 +24,34 @@
             display: inline-block;
             margin-top: 20px;
             min-height: 50px;
+            background: rgba(15, 15, 15, 0.8);
+            box-shadow: 0 0 20px #0fff95;
         }
         .btn {
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
+            padding: 15px 30px;
+            font-size: 1.5em;
             color: #0d0d0d;
-            background-color: #0fff95;
+            background: linear-gradient(90deg, #0fff95, #00cc66);
             border: none;
             cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #0fff95;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, #00cc66, #0fff95);
+            transform: scale(1.1);
+        }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.8; }
         }
     </style>
 </head>
 <body>
     <h1>Welcome to CyberSec Hub</h1>
-    <div class="console" id="console"></div>
+    <div class="console" id="console">[ Terminal Ready ]</div>
     <br>
     <button class="btn">Enter</button>
 </body>
