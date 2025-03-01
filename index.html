@@ -10,32 +10,47 @@
             color: #0fff95;
             font-family: 'Courier New', monospace;
             text-align: center;
-            padding: 50px;
+            padding: 20px;
         }
         h1 {
-            font-size: 3em;
+            font-size: 2.5em;
             text-shadow: 0 0 10px #0fff95;
             animation: flicker 1.5s infinite alternate;
+            margin-bottom: 20px;
+        }
+        .terminal-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .console {
             font-size: 1.2em;
             border: 2px solid #0fff95;
-            padding: 20px;
-            display: inline-block;
-            margin-top: 20px;
-            min-height: 300px;
-            width: 80%;
-            background: rgba(15, 15, 15, 0.8);
+            padding: 15px;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(15, 15, 15, 0.9);
             box-shadow: 0 0 20px #0fff95;
             text-align: left;
             overflow-y: auto;
             white-space: pre-wrap;
+            min-height: 300px;
+            border-radius: 5px;
         }
         .input-line {
             display: flex;
+            align-items: center;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(15, 15, 15, 0.9);
+            border: 2px solid #0fff95;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
         }
         .input-line span {
             color: #0fff95;
+            margin-right: 10px;
         }
         .input-line input {
             background: none;
@@ -54,12 +69,14 @@
 </head>
 <body>
     <h1>Welcome to zZz</h1>
-    <div class="console" id="console">
-        <div>Welcome to zZz Terminal. Type 'help' to see available commands.</div>
-    </div>
-    <div class="input-line">
-        <span>root@zZz:~#</span>
-        <input type="text" id="commandInput" autofocus>
+    <div class="terminal-container">
+        <div class="console" id="console">
+            <div>Welcome to zZz Terminal. Type 'help' to see available commands.</div>
+        </div>
+        <div class="input-line">
+            <span>root@zZz:~#</span>
+            <input type="text" id="commandInput" autofocus>
+        </div>
     </div>
     <script>
         const consoleDiv = document.getElementById("console");
