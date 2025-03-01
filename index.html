@@ -1,37 +1,56 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello, World!</title>
+    <title>CyberSec Hub</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f8ff;
-            font-family: 'Arial', sans-serif;
+            background-color: #0d0d0d;
+            color: #0fff95;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 50px;
         }
         h1 {
-            color: #333;
-            font-size: 4rem;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
+            font-size: 3em;
         }
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+        .console {
+            font-size: 1.5em;
+            border: 2px solid #0fff95;
+            padding: 20px;
+            display: inline-block;
+            margin-top: 20px;
+            min-height: 50px;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #0d0d0d;
+            background-color: #0fff95;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <h1>Welcome to CyberSec Hub</h1>
+    <div class="console" id="console"></div>
+    <br>
+    <button class="btn" onclick="alert('Access Granted!')">Enter</button>
+    
+    <script>
+        const text = "Initializing...\nConnecting to server...\nAccess Granted!";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("console").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        window.onload = typeWriter;
+    </script>
 </body>
 </html>
