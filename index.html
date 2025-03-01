@@ -38,19 +38,6 @@
     <h1>Welcome to CyberSec Hub</h1>
     <div class="console" id="console"></div>
     <br>
-    <button class="btn" onclick="alert('Access Granted!')">Enter</button>
-    
-    <script>
-        const text = "Initializing...\nConnecting to server...\nAccess Granted!";
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("console").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        }
-        window.onload = typeWriter;
-    </script>
+    <button class="btn">Enter</button>
 </body>
 </html>
