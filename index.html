@@ -74,25 +74,41 @@
             <div>Welcome to zZz Terminal. Type 'man' to see available commands.</div>
         </div>
         <div class="input-line">
-            <span>root@zZz:~#</span>
+            <span id="prompt">root@zZz:~#</span>
             <input type="text" id="commandInput" autofocus>
         </div>
     </div>
     <script>
         const consoleDiv = document.getElementById("console");
         const inputField = document.getElementById("commandInput");
-        let currentDirectory = "root@zZz:~#";
-
+        const promptSpan = document.getElementById("prompt");
+        
+        let currentDirectory = "/home/user";
+        const fileSystem = {
+            "/home/user": ["Documents", "Downloads", "Pictures", "Music", "Desktop"],
+            "/home/user/Documents": ["Work", "Personal"],
+            "/home/user/Downloads": [],
+            "/home/user/Pictures": ["Wallpapers", "Screenshots"],
+            "/home/user/Music": [],
+            "/home/user/Desktop": []
+        };
+        
         const commands = {
             "man": "Available commands: ls, cd, pwd, clear",
-            "ls": "Documents  Downloads  Pictures  Music  Desktop",
+            "ls": () => fileSystem[currentDirectory] ? fileSystem[currentDirectory].join("  ") : "",
             "pwd": () => currentDirectory,
             "cd": (args) => {
                 if (!args || args === "~") {
                     currentDirectory = "/home/user";
                 } else {
-                    currentDirectory += "/" + args;
+                    let newPath = currentDirectory + "/" + args;
+                    if (fileSystem[newPath]) {
+                        currentDirectory = newPath;
+                    } else {
+                        return "No such directory: " + args;
+                    }
                 }
+                promptSpan.textContent = `root@zZz:${currentDirectory}#`;
                 return "Changed directory to " + currentDirectory;
             },
             "clear": () => {
@@ -100,23 +116,23 @@
                 return "";
             }
         };
-
+        
         inputField.addEventListener("keydown", function(event) {
             if (event.key === "Enter") {
                 let input = inputField.value.trim();
                 let parts = input.split(" ");
                 let command = parts[0];
                 let args = parts.slice(1).join(" ");
-
-                consoleDiv.innerHTML += `\n${currentDirectory}$ ${input}`;
-
+                
+                consoleDiv.innerHTML += `\n${promptSpan.textContent} ${input}`;
+                
                 if (commands[command]) {
                     let output = typeof commands[command] === "function" ? commands[command](args) : commands[command];
-                    consoleDiv.innerHTML += `\n ${output}`;
+                    consoleDiv.innerHTML += `\n${output}`;
                 } else {
                     consoleDiv.innerHTML += "\nCommand not found";
                 }
-
+                
                 inputField.value = "";
                 consoleDiv.scrollTop = consoleDiv.scrollHeight;
             }
