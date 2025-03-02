@@ -108,11 +108,11 @@
                 let command = parts[0];
                 let args = parts.slice(1).join(" ");
 
-                consoleDiv.innerHTML += `\n${currentDirectory}$ ${input}`;
+                consoleDiv.innerHTML += `\n${currentDirectory}$ #{input}`;
 
                 if (commands[command]) {
                     let output = typeof commands[command] === "function" ? commands[command](args) : commands[command];
-                    consoleDiv.innerHTML += `\n${output}`;
+                    consoleDiv.innerHTML += `\n #{output}`;
                 } else {
                     consoleDiv.innerHTML += "\nCommand not found";
                 }
