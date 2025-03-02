@@ -71,7 +71,7 @@
     <h1>Welcome to zZz</h1>
     <div class="terminal-container">
         <div class="console" id="console">
-            <div>Welcome to zZz Terminal. Type 'help' to see available commands.</div>
+            <div>Welcome to zZz Terminal. Type 'man' to see available commands.</div>
         </div>
         <div class="input-line">
             <span>root@zZz:~#</span>
@@ -84,7 +84,7 @@
         let currentDirectory = "root@zZz:~#";
 
         const commands = {
-            "help": "Available commands: ls, cd, pwd, clear",
+            "man": "Available commands: ls, cd, pwd, clear",
             "ls": "Documents  Downloads  Pictures  Music  Desktop",
             "pwd": () => currentDirectory,
             "cd": (args) => {
