@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zZz</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #0fff95;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 0 0 10px #0fff95;
+            animation: flicker 1.5s infinite alternate;
+            margin-bottom: 20px;
+        }
+        .terminal-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .console {
+            font-size: 1.2em;
+            border: 2px solid #0fff95;
+            padding: 15px;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(15, 15, 15, 0.9);
+            box-shadow: 0 0 20px #0fff95;
+            text-align: left;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            min-height: 300px;
+            border-radius: 5px;
+        }
+        .input-line {
+            display: flex;
+            align-items: center;
+            width: 90%;
+            max-width: 800px;
+            background: rgba(15, 15, 15, 0.9);
+            border: 2px solid #0fff95;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .input-line span {
+            color: #0fff95;
+            margin-right: 10px;
+        }
+        .input-line input {
+            background: none;
+            border: none;
+            color: #0fff95;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            outline: none;
+            width: 100%;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to zZz</h1>
+    <div class="terminal-container">
+        <div class="console" id="console">
+            <div>Welcome to zZz Terminal. Type 'man' to see available commands.</div>
+        </div>
+        <div class="input-line">
+            <span id="prompt">root@zZz:~#</span>
+            <input type="text" id="commandInput" autofocus>
+        </div>
+    </div>
+    <script>
+        const consoleDiv = document.getElementById("console");
+        const inputField = document.getElementById("commandInput");
+        const promptSpan = document.getElementById("prompt");
+        
+        let currentDirectory = "/home/user";
+        const fileSystem = {
+            "/home/user": ["Documents", "Downloads", "Pictures", "Music", "Desktop"],
+            "/home/user/Documents": ["Work", "Personal"],
+            "/home/user/Downloads": [],
+            "/home/user/Pictures": ["Wallpapers", "Screenshots"],
+            "/home/user/Music": [],
+            "/home/user/Desktop": []
+        };
+        
+        const commands = {
+            "man": "Available commands: ls, cd, pwd, clear",
+            "ls": () => fileSystem[currentDirectory] ? fileSystem[currentDirectory].join("  ") : "",
+            "pwd": () => currentDirectory,
+            "cd": (args) => {
+                if (!args || args === "~") {
+                    currentDirectory = "/home/user";
+                } else {
+                    let newPath = currentDirectory + "/" + args;
+                    if (fileSystem[newPath]) {
+                        currentDirectory = newPath;
+                    } else {
+                        return "No such directory: " + args;
+                    }
+                }
+                promptSpan.textContent = `root@zZz:${currentDirectory}#`;
+                return "Changed directory to " + currentDirectory;
+            },
+            "clear": () => {
+                consoleDiv.innerHTML = "";
+                return "";
+            }
+        };
+        
+        inputField.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                let input = inputField.value.trim();
+                let parts = input.split(" ");
+                let command = parts[0];
+                let args = parts.slice(1).join(" ");
+                
+                consoleDiv.innerHTML += `\n${promptSpan.textContent} ${input}`;
+                
+                if (commands[command]) {
+                    let output = typeof commands[command] === "function" ? commands[command](args) : commands[command];
+                    consoleDiv.innerHTML += `\n${output}`;
+                } else {
+                    consoleDiv.innerHTML += "\nCommand not found";
+                }
+                
+                inputField.value = "";
+                consoleDiv.scrollTop = consoleDiv.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
