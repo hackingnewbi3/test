@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리눅스 기본 명령어</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            font-family: 'Fira Code', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #ffcc00;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #2b2b2b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .command {
+            background: #3a3a3a;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .command h2 {
+            color: #ffcc00;
+            margin: 0;
+        }
+        .command p {
+            margin: 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>리눅스 기본 명령어</h1>
+    <div class="container">
+        <div class="command">
+            <h2>ls -l</h2>
+            <p>디렉토리의 내용을 상세한 리스트 형식으로 출력</p>
+        </div>
+        <div class="command">
+            <h2>cd [디렉토리]</h2>
+            <p>디렉토리를 변경</p>
+        </div>
+        <div class="command">
+            <h2>rm [파일/디렉토리]</h2>
+            <p>파일 또는 디렉토리를 삭제</p>
+        </div>
+        <div class="command">
+            <h2>cat [파일]</h2>
+            <p>파일 내용을 출력</p>
+        </div>
+        <div class="command">
+            <h2>touch [파일]</h2>
+            <p>새 파일을 생성하거나 기존 파일의 수정 시간을 변경</p>
+        </div>
+        <div class="command">
+            <h2>cp [원본] [대상]</h2>
+            <p>파일 또는 디렉토리를 복사</p>
+        </div>
+        <div class="command">
+            <h2>mv [원본] [대상]</h2>
+            <p>파일 또는 디렉토리를 이동하거나 이름 변경</p>
+        </div>
+        <div class="command">
+            <h2>mkdir [디렉토리]</h2>
+            <p>새로운 디렉토리 생성</p>
+        </div>
+        <div class="command">
+            <h2>rmdir [디렉토리]</h2>
+            <p>비어있는 디렉토리 삭제</p>
+        </div>
+        <div class="command">
+            <h2>chmod [권한] [파일]</h2>
+            <p>파일 또는 디렉토리의 권한 변경</p>
+        </div>
+        <div class="command">
+            <h2>chown [사용자:그룹] [파일]</h2>
+            <p>파일 또는 디렉토리의 소유권 변경</p>
+        </div>
+        <div class="command">
+            <h2>ps aux</h2>
+            <p>실행 중인 프로세스 목록 출력</p>
+        </div>
+        <div class="command">
+            <h2>kill [PID]</h2>
+            <p>지정된 프로세스를 종료</p>
+        </div>
+        <div class="command">
+            <h2>top</h2>
+            <p>실시간 시스템 프로세스 및 리소스 사용 현황 출력</p>
+        </div>
+        <div class="command">
+            <h2>df -h</h2>
+            <p>디스크 공간 사용량 확인</p>
+        </div>
+        <div class="command">
+            <h2>du -sh [디렉토리]</h2>
+            <p>디렉토리의 크기 확인</p>
+        </div>
+        <div class="command">
+            <h2>grep [문자열] [파일]</h2>
+            <p>파일에서 특정 문자열 검색</p>
+        </div>
+        <div class="command">
+            <h2>find [디렉토리] -name [파일명]</h2>
+            <p>특정 파일을 찾기 위해 검색</p>
+        </div>
+        <div class="command">
+            <h2>tar -cvf [파일명.tar] [디렉토리]</h2>
+            <p>디렉토리를 tar 파일로 압축</p>
+        </div>
+        <div class="command">
+            <h2>tar -xvf [파일명.tar]</h2>
+            <p>tar 압축 파일 해제</p>
+        </div>
+        <div class="command">
+            <h2>zip [파일명.zip] [파일]</h2>
+            <p>파일을 zip 형식으로 압축</p>
+        </div>
+        <div class="command">
+            <h2>unzip [파일명.zip]</h2>
+            <p>zip 압축 파일 해제</p>
+        </div>
+    </div>
+</body>
+</html>
