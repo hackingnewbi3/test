@@ -10,7 +10,12 @@
             color: #0fff95;
             font-family: 'Courier New', monospace;
             text-align: center;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         h1 {
             font-size: 2.5em;
@@ -22,13 +27,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 90%;
+            max-width: 800px;
         }
         .console {
             font-size: 1.2em;
             border: 2px solid #0fff95;
             padding: 15px;
-            width: 90%;
-            max-width: 800px;
+            width: 100%;
             background: rgba(15, 15, 15, 0.9);
             box-shadow: 0 0 20px #0fff95;
             text-align: left;
@@ -40,8 +46,7 @@
         .input-line {
             display: flex;
             align-items: center;
-            width: 90%;
-            max-width: 800px;
+            width: 100%;
             background: rgba(15, 15, 15, 0.9);
             border: 2px solid #0fff95;
             padding: 10px;
